@@ -10,3 +10,22 @@ log base not consider
 constant order is 1 
 we need to calculate the running time of the algorithm 
 then calculate the big o notation 
+to find t we need to calculate number of operations performed 
+
+we are interested in how many times the individual operation executed 
+
+operations which are dependent on n we focus 
+
+.we need to consider the loops range before finalizing the time complexity
+.if loops control element incremented or decremented by constant amount then time complexity is n 
+. if divided or multiplied by constant log base for that base not required
+.in case of inner loops how many times inner most travser that will be the big o notation
+.if inner loops itterations depedens on outer loops then we need to consider them giving the values as inputs from 1 to n values and check the pattern
+.if-else consider one with highest value 
+.worst-time
+max time taken for algorithm
+.best case 
+min time taken to solve problem by algo
+.avg case 
+avg time taken to solve the problem 
+ 
