@@ -1,0 +1,12 @@
+calculating the run time of an algorithm
+asymptotic analysis 
+if input size increase the running time increase
+
+big o notation
+f(n)<=c g(n)
+
+big o fastest growing consider 
+log base not consider 
+constant order is 1 
+we need to calculate the running time of the algorithm 
+then calculate the big o notation 
