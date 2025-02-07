@@ -28,4 +28,10 @@ max time taken for algorithm
 min time taken to solve problem by algo
 .avg case 
 avg time taken to solve the problem 
+
+
+-----linked list
+the data not stored in continues memory 
+each item the link to next item stored
+---in python function variable pass we will pass its values 
  
