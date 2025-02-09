@@ -112,3 +112,20 @@ def fact(n):
 
 result=fact(5)
 print(result)
+#lamda function
+f=lambda a: a*a
+result=f(5)
+print(result)
+
+#filter
+def is_even(n):
+    return n%2==0
+nums=[3,2,6,8,4,6,2,9]
+evens=list(filter(is_even,nums))
+doubles=list(map(lambda n: n+2,evens))
+from functools import reduce
+def add_all(a,b):
+    return a+b
+sum=reduce(add_all,doubles)
+print(sum)
+print(evens)
