@@ -129,3 +129,24 @@ def add_all(a,b):
 sum=reduce(add_all,doubles)
 print(sum)
 print(evens)
+
+#decoratores exsisting functions we can add extra code without even touching it 
+def div(a,b):
+    print(a/b)
+
+def smart_div(func):
+
+    def inner(a,b):
+        if a <b:
+
+          a,b=b,a
+        return func(a,b)
+    return inner
+
+div1=smart_div(div)
+
+div(2,4)
+#to use modules we will take the logic into 1 file then the processing into the other file 
+#and import it 
+
+

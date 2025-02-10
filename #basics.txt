@@ -1,0 +1,5 @@
+#basics
+def person(name,age):
+    print(name)
+    print(age-8)
+person(28,"lol")
