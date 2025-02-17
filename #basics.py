@@ -146,7 +146,98 @@ def smart_div(func):
 div1=smart_div(div)
 
 div(2,4)
+
+def raja():
+    print("rajamouli")
+
+raja()
 #to use modules we will take the logic into 1 file then the processing into the other file 
 #and import it 
+
+#class basics
+class Computer:
+    def __init__(self,cpu,ram):
+        self.cpu=cpu
+        self.ram=ram
+    def config(self):
+        print("nani")
+        print(self.cpu)
+    def samantha(self):
+        print("sandeep nahi")
+        print(self.cpu)
+
+
+com1=Computer("i5","8gb")
+com1.config()#init required when we have multiple variables or aruguments with same name one argument pass all copy then we send the information into the class then y using self.keyword we will copy the data
+com1.samantha()#self required to access the particular elements from the particular class functions
+
+print("neney nani ney")
+#self indicated the current object being used
+#self left side constructor used 
+
+class Computer:
+    def __init__(self):
+        self.name = "navin"
+        self.age = 34
+
+    def compare(self, other):
+        if self.age == other.age:
+            return True
+        else:
+            return False
+
+c1 = Computer()  # Creating an instance of Computer class
+c1.age = 90
+c2 = Computer()
+
+if c1.compare(c2):
+    print("they are same")
+else:
+    print("they are different")
+
+print(c1.name)
+#variables
+# we have instance variables
+class Car:
+    wheels=4
+    def __init__(self):
+        self.mil=90
+        self.com="kia"
+
+c1=Car()
+c2=Car()
+c1.mil=9
+
+print(c1.com,c1.mil,c1.wheels)
+print(c2.com,c2.mil,c2.wheels)
+#inheritence
+class A:
+    def feature1(self):
+        print("feature 1 working")
+    def feature2(self):
+        print("feature 2")
+class B(A):
+    def feature3(self):
+        print("mynameis")
+    def features4(self):
+        print("nani")
+class C(B):
+    def feature5(self):
+        print("yaya")
+class D(B,A):
+    def lol():
+        print("police")
+a1=A()
+a1.feature1()
+b1=B()
+b1.feature1()
+b1.feature2()
+c=C()
+c.feature1()
+d=D()
+d.feature3()
+#constructor
+#init function need not to call direct object create then print and always callled the init of that class first which it made constructor then rest
+
 
 
