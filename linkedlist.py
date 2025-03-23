@@ -44,6 +44,7 @@ class SingleLinkedList:  #to find the link or the address of the node use p.link
             if self.start is None:
                 print("list is none")
                  return
+            #insertion at first position
             if x == self.start.info:
                  temp= Node(data)
                  temp.link = self.start
