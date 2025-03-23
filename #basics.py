@@ -210,34 +210,17 @@ c1.mil=9
 
 print(c1.com,c1.mil,c1.wheels)
 print(c2.com,c2.mil,c2.wheels)
-#inheritence
-class A:
-    def feature1(self):
-        print("feature 1 working")
-    def feature2(self):
-        print("feature 2")
-class B(A):
-    def feature3(self):
-        print("mynameis")
-    def features4(self):
-        print("nani")
-class C(B):
-    def feature5(self):
-        print("yaya")
-class D(B,A):
-    def lol():
-        print("police")
-a1=A()
-a1.feature1()
-b1=B()
-b1.feature1()
-b1.feature2()
-c=C()
-c.feature1()
-d=D()
-d.feature3()
-#constructor
-#init function need not to call direct object create then print and always callled the init of that class first which it made constructor then rest
+#method resolution order multiple functions with same name in the given parent class present the order taken from left to right
+#multiple classes parent classes then we try to access the same function then go from left to right 
+#generators returns object back in the form of itterator
+def topten():
+   yield 5
 
 
 
+
+
+
+
+values=topten()
+print(values.__next__())
