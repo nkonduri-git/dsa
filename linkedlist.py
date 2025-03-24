@@ -44,7 +44,6 @@ class SingleLinkedList:  #to find the link or the address of the node use p.link
             if self.start is None:
                 print("list is none")
                  return
-            #insertion at first position
             if x == self.start.info:
                  temp= Node(data)
                  temp.link = self.start
@@ -62,47 +61,7 @@ class SingleLinkedList:  #to find the link or the address of the node use p.link
                 temp=Node(data)
                 temp.link=p.link
                 p.link = temp
-        def insert_at_position(self,data,k):
-            if k == 1:
-                temp=Node(data)
-                temp.link=self.start
-                self.start=temp
-                return
-            p = self.start
-            i=1
-            while i<k-1 and p is not None:
-                p=p.link
-                i+=1
-            if p is  None:
-                print("you can insert only upto position",i)
-            else:
-                temp=Node(data)
-                temp.link=p.link
-                p.link=temp
-        def delete_node(self,x):
-            if self.start.info == x:
-                self.start = self.start.link
-                return
-            #deletion in between
-            p=self.start
-            while p.link is not None:
-                if p.link.info == x:
-                    break
-                p=p.link
-            if p.link is None:
-                print("element ",x,"not in the list ")
-            else:
-                p.link=p.link.link
-        def delete_first_node(self):
-            if self.start is None:
-                return 
-                self.start=self.start.link
-        def deletion_last_node(self):
-            if self.start is None:
-                return
-            if self.start.link is None:
-
-
+            
 list=SingleLinkedList()
 list.create_list()
 while True:
