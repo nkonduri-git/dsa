@@ -212,8 +212,8 @@ print(c1.com,c1.mil,c1.wheels)
 print(c2.com,c2.mil,c2.wheels)
 #method resolution order multiple functions with same name in the given parent class present the order taken from left to right
 #multiple classes parent classes then we try to access the same function then go from left to right 
-#generators returns object back in the form of itterator
-def topten():
+#generators
+def topten:
    yield 5
 
 
@@ -223,4 +223,4 @@ def topten():
 
 
 values=topten()
-print(values.__next__())
+print(values)

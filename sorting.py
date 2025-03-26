@@ -58,3 +58,84 @@ def insertion_sort(a):
 list1=[6,3,1,5,9,8]
 insertion_sort(list1)
 print(list1)
+#data in sorted is o(n)
+#data in reverse sorted order o(n2)
+#data in random order it is o(n2)
+#search_linear search
+def Search(a,n,searchValue):
+    for i in range(n):
+        if a[i]==searchValue:
+            return i
+        return -1
+#####
+n=int(input("Enter the number of elements"))
+a=[None]*n
+print('Enter the elemets')
+for i in range(n):
+    a[i]=int(input("Enter elements :"))
+SearchValue = int(input("Enter the elements:"))
+index=Search(a,n,searchvalue)
+if index == -1:
+    print("value",searchvalue,"not there in the list")
+else:
+    print("value",searchvalue,"present at index",index)
+#best case we will get it as o(1)
+#worst case we will get it as 0(n)
+#avg case o(n)
+#binary_search only in sorted array
+#always search from middle elemet if the other element is bigger then go left if middle bigger than search  is small then go left 
+def binary_search(a,n,searchValue):
+    first=0
+    last=n-1
+
+
+    while first <= last:
+        mid = (first+last)//2
+        if searchValue<a[mid]:
+            last = mid-1
+        elif searchValue > a[mid];
+              first =mid+1
+        else:
+            return mid
+    return -1
+###########
+n=int(input("enter the number of eleemnts"))
+a=[None]*n
+
+print("enter the number of elements")
+for i in range(n):
+    a[i]=int(input("enter element"))
+searchValue = int(input("enter the search value"))
+index = binary_search(a,n,,searchValue)
+
+if index == -1:
+    print("value",searchValue,"not present in the array")
+else:
+    print("value",searchValue,"present at index",index)
+###recursive
+
+def binarysearch(a,n,searchvalue):
+
+return _search(a,0,n-1,searchvalue)
+def _search(a,first,last,searchValue):
+    if(first > last ):
+        return -1
+    mid=(first+last)//2
+    if searchValue > a[mid]:
+        return _search(a,mid+1,last,searchValue)
+    elif searchValue<a[mid]:
+        return _search(a,first,mid-1,searchValue)
+    else:
+        return mid 
+n=int(input("Enter the number of elements"))
+a=[None]*n
+print("enter the number of elements")
+for i in range(n):
+    a[i]=int(input("Enter element"))
+searchValue = int(input("Enter the search value"))
+index = binary_search(a,n,searchValue)
+if index == -1:
+    print("value",searchValue,"not present ")
+else: 
+    print("value",searchValue,"present at index",index)
+    
