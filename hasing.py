@@ -130,4 +130,15 @@ while True:
         aRecord = table.search(id)
         if aRecord is None:
             print("key is not found")
-            
+        else:
+            print(aRecord)
+    elif choice == 3:
+        id=int(input("Enter a key to be deleted"))
+        table.delete(id)
+    elif choice == 4:
+        table.display_table()
+    elif choice == 5:
+        break
+    else:
+        print("print wrong option")
+    print()  
