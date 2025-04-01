@@ -138,4 +138,6 @@ if index == -1:
     print("value",searchValue,"not present ")
 else: 
     print("value",searchValue,"present at index",index)
-    
+# binary_search o(n/2)
+#search until now number of elemets depends so to reduce time created a table
+#where record associated with the index so created a address table where records stored in the adddress
