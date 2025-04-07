@@ -1,0 +1,33 @@
+AZ-900 certification
+ 
+dedicated server
+one machine to one business
+virtual private server:
+ 
+one physical machine dedicated to a single business
+the single machine is virtualized into sub-machine 
+shared hosting 1 server used by multiple business
+cloud
+multiple machine that acts as one system 
+
+there could be 100 of cloud services the 4 most services for iaas would be 
+cloud
+pay for what you use
+can be used anywhere
+cloud services secure by default
+data backup
+inc or dec resources on demand 
+automate the scaling during the spikes and drops in demand elastic
+services
+saas software as a service
+a product that is run and managed by the service provider 
+paas focus on deployment and management of your apps 
+iaas infrastructure as a service 
+provides access to networking ,computers and  data storage 
+public cloud
+the cloud provider has the whole infrastructure
+private cloud
+if a company or org has its own servers amd cloud 
+hybrid
+both private and public
+on premises cost is high and cloud cost is less
