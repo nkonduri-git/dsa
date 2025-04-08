@@ -31,3 +31,49 @@ if a company or org has its own servers amd cloud
 hybrid
 both private and public
 on premises cost is high and cloud cost is less
+
+capex is costly and opex is simple and cost effective
+solutions architect
+a technical org that a architect a technical solution using the multiple systems
+cloud architect:
+a solutions architect that is focused on architecting the technical solutions using the cloud services
+------
+a cloud architect must ensure the service available at high 
+scalability:your ability to grow rapidly
+elasticity:your ability to shrink and grow to reach demands
+high availability : services remain available anytime
+load balancer used to evenly distribute the traffic between multiple servers in one data centre
+high scalability: vertical one bigger server and horizontal add multiple serves 
+high elasticity: ability to automatically increase or decrese your capacity based on demand
+horizontal scling:
+scaling out: add more servers of same size 
+scaling in:removing more servers of same size 
+azure vm scale sets automatically inc or dec in response to demand or a defined schedule 
+highly fault tolerant: no single point of failure 
+
+-----
+fail-overs : is when you have plan to shift to a reduant system in case primary fail secondary all the data synced from primary
+azure traffic manager: which is a dns based traffic balancer to fail-over from a primary system to a standy-secondary system
+high durability:
+recover from a disaster and prevent the loss of data 
+business continuity plan:
+unplanned disruption then how business continues 
+recovery point objective:
+the max accepeteble data loss after an unplanned data-loss incident 
+recovery-time objective:how muc hamount of downtime your business can tolerate without any loss 
+disaster recovery options: 
+low -- backup and restore
+backup your data and restore it to new infrastructure.hours time taken
+pilot light: data is replicated to another region with the minimal serviced running 10 min 
+warm standby:scaled down copy of your infrastructure running ready to scale up minutes 
+multi site active;scaled up copy of your infrsstructure in another region real-time
+
+the evolution of computing:
+dedicated:a physical server wholly utilized by single customer 
+you will overpay for the underutilized server but security is high and privacy full 
+
+
+
+
+
+
