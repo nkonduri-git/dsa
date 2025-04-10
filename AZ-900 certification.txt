@@ -72,7 +72,86 @@ the evolution of computing:
 dedicated:a physical server wholly utilized by single customer 
 you will overpay for the underutilized server but security is high and privacy full 
 
+capex  vs                                                    opex
+spending money upfront 
+like infrastructure                                   the cost paid for only leasing soft             
 
+
+          
+                                            training employees in cloud services 
+                                                       paying for cloud support
+
+solutions architect
+technical solution using multiple systems 
+cloud architect:
+solely on architecting the technical solutions using cloud services 
+
+cloud architect need to understand the 
+availability-your ability to ensure a service remains available
+scalability-your ability to grow rapidly
+elasticity-your ability to shrink or grow to meet the demand
+fault-tolerance-your ability to prevent failure
+disaster recovery-your ability to recover to recover from failure
+
+aavailabilty - load balancer used so that one place server down route to other if its in other data centre more preferable as it is more effective one data centre fail
+high scalabilty:
+inc your capacity based on traffic 2 scalings
+1)vertical in one server space inc
+2)horizontal add servers
+high elasticity;
+inc or dec capacity based on demand
+scaling out- inc servers
+scaling in- remove more servers
+avm vm scale set automatically inc or dec in response to demand 
+high fault tolerant:
+preventing the chance of failure:
+by making the copy of the production database
+azure traffic manager used 
+high durability:
+recover from loss of data 
+business continuity plan
+how a business will continue to operate even when there is a unplanned disruption 
+recovery point objective : the max amount of data loss which is acceptable after an unplanned data loss occurs
+recovery time objective:the max amount of downtime your business can handle without a  big loss 
+the evolution of computing
+1)dedicated wasted space 
+2)vm(virtual machines):you can run multiple virtual machines on one machine 
+we can share with the other customers 
+so that fraction only charged 
+but you are limited by the usage of the guest os and resource sharing problem occurs 
+3)containers:vm can run multiple containers 
+docker deamon is the name of soft layer that lets you run a multiple container 
+more cost effective 
+multiple apps can run side by side without being limited to the same os 
+4)functions;
+
+even further subdivided into small parts apps further divided 
+a managed vm running managed containers
+serverless compute it is called
+choose the piece code and memory and time of utilization that is what we pay
+region grouping of multiple data centres 
+azure 58 groups across 140 countries 
+
+a geography 
+azure geography is a discrete market of two or more regions that preserves data residency data stays native to country and compliance boundry 
+each region is paired with the another region 300 miles away only one region is updated at a time to ensure no outages 
+
+not all azure services available at all regions 
+recommended region that provides the broadcast range of service capabilities and support available zones 
+alt regions 
+a region that extends azures footprint within 
+not designed to support az
+general availability: when service ready to be used by everyone 
+
+\azure services grouped into 3 categories
+1)foundational:when ga immediately or in 12 month in recommended and alt regions
+2)mainstream when ga immediately or in 12 month in recommended may be available in alt regions 
+3)specialized : available in recommended or alternative region beased on customers demand
+special regions meet their compliance 
+availability zones the zones containing the one or more datacentres
+region = 3 az
+choosing the number of az means that zone will be placed the data 
+some regions no az available
 
 
 
