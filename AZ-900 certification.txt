@@ -152,7 +152,35 @@ availability zones the zones containing the one or more datacentres
 region = 3 az
 choosing the number of az means that zone will be placed the data 
 some regions no az available
-
-
-
-
+fault domain:
+a logical grouping of hardware to avoid a single point of failure within an az group of virtual machines that share a common power source
+update domain:
+azure make sure you update the underlaying hardware and software make sure they dont go offline
+availability set:
+vm in availability set are different fault/update domains to avoid downtime
+1`availability set multiple domains present on if suppose 1 rack 3 fd then 1 down other 2 operational 
+azure computing services:
+1)azure vm
+windows or Linux machines used you can choose your own os,memory,cpu
+2)azure container 
+docker as a service run containerized apps on azured without provising the servers
+3)azure Kubernetes services:
+easy to deploy manage and scale containerized application
+4)azure service fabric:
+tier-1 enterprise containers as service
+distributed systems platform runs in azure or on-premises 
+easy to package deploy and manage and reliable 
+5)azure functions:
+serverless compute runs code without managing the server
+short time run once done underlying servers shutting down
+6)azure batch:
+plans schedules and executes your batch computer workloads across multiple 100+ jobs in parallel
+virtual machine:
+lets u use a server without having to buy the server
+the size determined by the image
+azure vm billed by hourly rate
+azure launch creates a lot of components like
+nsg(network security group) : attached to the nic which provides the rules around the ports and protocals 
+network interface: a device that handles ip protocals 
+virtual machine instance: the actual server
+Microsoft supports lots of os you can also bring your own version of the Linux by creating it using the Linux virtual hard disk
