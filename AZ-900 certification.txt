@@ -184,3 +184,132 @@ nsg(network security group) : attached to the nic which provides the rules aroun
 network interface: a device that handles ip protocals 
 virtual machine instance: the actual server
 Microsoft supports lots of os you can also bring your own version of the Linux by creating it using the Linux virtual hard disk
+az fault domains:
+a logical grouping of hardware to avoid single point of failure 
+update domain:
+update to hardware and software
+availability set : a logical grou[ing in azure to ensure that vm you place in the availability set are different fault/update domain to avoid downtimes
+operating system:
+that manages all the programs in your system
+azure scale set:
+allows you to automatically inc or dec the capacity 
+create a scaling policies to automatically add or remove based on host metrics 
+create a health checks 
+1)load balancer:
+evenly distribute the vm across the multiple availability zone 
+load balancer 2 types:
+1)application gateway https web traffic load balancer
+2)azure load balancer tcp/udp network traffic 
+
+scaling policy:
+scale out:when an instance should be added to scale set to increase capacity
+cpu per, no of vm and after how long
+scale in: reduce capacity removed to dec capacity 
+after scale set you have lot of options to configure the rule
+aggregates after collect what to do 
+if we want more insights in the app
+we will install app insights:a small instrumental package i  your application that monitprs app and sends infor azure
+azure diagnostics :it is an agent runs inside a vm instance  
+scale-in policy:which vm must be removed when decrese the capacity
+
+default delete the one with the highest instance id 
+delete the oldest vm and deleted the newest vm
+update policy:
+determine how vm inst are brought up-to date 
+1)automatic:
+inc with the start upgrading immediately 
+2)manual:
+exisiting instance manually upgrade
+3)rolling:
+upgrades roll out in batches with optional pause 
+health monitoring:
+used to analysis if our server is healthy or unhealthy
+
+two modes of health monitoring:
+application health extension:
+ ping an http request to a specific path and expect a status of 200 
+load balancer probe:
+ allow you to check based on tcp,udp or http r4equest
+automatic repair 
+if an instance found to be unhealthy and launch new instance
+Microsoft azure virtual desktop desktop and app virtualization service it works across all the devices like windows ios can access remote apps
+safety high
+
+advantages
+it provides full windows desktop virtualization 
+and also great integreation with the Microsoft 365  app 
+-reduce cost of licensing and infrastructure
+-protect against outages
+-manages the virtual desktop infrastructure
+azure also provides the app services
+azure app services:
+load balance
+autoscaling
+automated manager
+
+
+azure app services 3 tiers and also create a unique name because it becomes its own domain
+
+
+runtimes
+a runtime software that are excuted while your program is running
+a runtime means what 
+deployment slots:
+allows you to create different env of your web applications asscoaited to different host name 
+azure app service env:
+fully isolated env provide for securely running the app 
+azure deployment slots apps we create multiple slots so that 1 has copy of other so that we can make changes in one and replace or swap with production
+multiple ase can be created within single az region  ase ideal for horizontal scaling
+ase external 
+ilb
+azure contaners instance:
+package,deploy,manage cloud applications using containers fully managed docker as a service 
+azure container instance: allows you to launch containers without the need to worry about the configuration or managing the underlying vm 
+azure container instance is designed for 
+1)simple application 
+2)task automation
+containers can be started in sec 
+containers per sec charged
+containers have custom sizing
+containers can deploy both the windows and Linux
+conatiners group:
+are collection of conatiners that get scheduled on the same host machine.
+this containers share the:
+lifecycle
+resources
+localnetwork
+storage
+multi-containers only support Linux containers now
+2 way to deploy 
+1)resource manager template
+yaml file
+containers restart policies
+container env variable:
+allow you to pass conf details to your container
+azure portals we can set that
+azure container doesnot store data that is generated with in the cycle
+which you can mount by using the azure file
+secret volume
+which can be done by using the giving the data in the power shell
+azure-file-volume-share-name: filename
+azure vnet
+we will launch our resources in that network
+azure dns own dns domain manage 
+azure vnet is a logically isolated section of azure network vnet multiple vnets attach which can be used as a 1 network
+they are 2 1)regional regional vnets peer
+2)global global vnets peer
+nic
+it is a hardware component that connects the computer to computer 
+nic communicate with the ip
+azure subnet virtual isolation with in thr network
+subnet 1 route table needed so that we can access 
+azure no prv or public subnet
+network sec can be kept
+azure dns(domain name service)
+it is a service translating a service name to its ip address 
+azure domains public allows you to manage the domains for internet access domains
+pointing your domain to your website
+private dns allows you to use your own custom domains instead of the azure provided domains
+
+virtual private network:extends a private network in public network gateway:
+it is a software for vpn it will deploy 2 vms they and ateway services 
