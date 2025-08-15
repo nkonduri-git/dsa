@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Karthik Konduri | Portfolio</title>
+  <style>
+    :root {
+      --bg-light: #f5f5f5;
+      --text-light: #333;
+      --bg-dark: #121212;
+      --text-dark: #f5f5f5;
+      --primary: #00b4d8;
+      --secondary: #0077b6;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: var(--bg-light);
+      color: var(--text-light);
+      scroll-behavior: smooth;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    header {
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      animation: fadeDown 1s ease;
+    }
+    @keyframes fadeDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    nav {
+      background: var(--secondary);
+      padding: 0.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffdd00;
+    }
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      border-bottom: 3px solid var(--primary);
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s, background 0.3s, color 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    body.dark .card {
+      background: #1e1e1e;
+      color: var(--text-dark);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    footer {
+      background: var(--secondary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .skills span {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      margin: 0.2rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .skills span:hover {
+      background: var(--secondary);
+    }
+    /* Dark mode toggle button */
+    #darkModeToggle {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark #darkModeToggle {
+      background: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Konduri Naga Venkata Karthik</h1>
+    <p>AI Research | Software Engineering | Big Data</p>
+    <p>📍 Indianapolis, IN | 📧 chaudrysharma@gmail.com | 📱 317-728-2938</p>
+    <button id="darkModeToggle">🌙 Dark Mode</button>
+  </header>
+
+  <nav>
+    <a href="#summary">Summary</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#skills">Skills</a>
+  </nav>
+
+  <section id="summary">
+    <h2>Summary</h2>
+    <div class="card">
+      <p>Proactive Computer Science professional with hands-on experience in AI research, big data engineering, and software development. Skilled in cloud migration, machine learning, and full-stack development. Passionate about using AI to enhance education and improve learning experiences. Strong problem-solving, organizational, and communication skills.</p>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="card">
+      <h3>Master of Science, Computer Science</h3>
+      <p><strong>Indiana University – Purdue University Indianapolis</strong> (2023–2026)</p>
+      <p>GPA: 3.5/4.0 | Courses: Computer Architecture, Learning Algorithms, Computational Theory, Machine Learning</p>
+    </div>
+    <div class="card">
+      <h3>Bachelor of Science, Computer Science</h3>
+      <p><strong>Keshav Memorial Institute of Technology</strong> (2019–2023)</p>
+      <p>GPA: 3.6/4.0 | Courses: Computer Architecture, Learning Algorithms, Computational Theory, Machine Learning</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="card">
+      <h3>AI Research Assistant</h3>
+      <p><strong>Indiana University – Purdue University Indianapolis</strong> (Jun 2025 – Aug 2025)</p>
+      <ul>
+        <li>Developed AI-driven virtual teacher for personalized learning.</li>
+        <li>Implemented deep learning NLP models for improved AI-student interactions.</li>
+        <li>Designed ML algorithms for real-time performance feedback.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Software Engineer Intern</h3>
+      <p><strong>Virtusa, Hyderabad</strong> (Jan 2023 – May 2023)</p>
+      <ul>
+        <li>Developed solutions using JavaScript, SQL, and HTML.</li>
+        <li>Optimized front-end and back-end performance.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Web Development Intern</h3>
+      <p><strong>Elearn Infotech, Hyderabad</strong> (Aug 2023 – Feb 2024)</p>
+      <ul>
+        <li>Built responsive interfaces using HTML, CSS, JavaScript, React/Angular.</li>
+        <li>Enhanced front-end usability and performance.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <div class="card">
+      <ul>
+        <li>Business English Certificate - Cambridge</li>
+        <li>Azure Fundamentals - Microsoft</li>
+        <li>Power BI Data Analyst Associate - Microsoft</li>
+        <li>Full Stack Web Developer - Geeks for Geeks</li>
+        <li>Machine Learning with Python - IBM</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="card skills">
+      <span>C++</span><span>C</span><span>Java</span><span>Objective-C</span><span>C#</span><span>SQL</span><span>JavaScript</span><span>Azure</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Karthik Konduri | Built with ❤️ and JavaScript</p>
+  </footer>
+
+  <script>
+    // Dark mode toggle
+    document.getElementById('darkModeToggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark');
+      this.textContent = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+
+    // Reveal sections on scroll
+    const sections = document.querySelectorAll('section');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if(sectionTop < triggerBottom) {
+          section.classList.add('show');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Initial check
+  </script>
+
+</body>
+</html>
+
+
+
