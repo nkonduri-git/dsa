@@ -1,0 +1,296 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 5
+            },
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "79d525c5-b1d7-463f-b3e0-96a989d13daa",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "\n\n**Data Sources You Can Use:**\n\n* **OpenWeatherMap API** → to fetch weather forecasts (temperature, precipitation, wind, air quality).\n* **Calendar Access** → to check my free/busy schedule.\n* **Excel (Trail Sheet)** → contains the list of trails with details (name, distance, difficulty, location, notes).\n* **Gmail** → to send the final recommendation to **[chaudrysharma@gmail.com](mailto:chaudrysharma@gmail.com)**.\n\n**Instructions:**\n\n1. **Check Weather:**\n\n   * Use OpenWeatherMap to fetch the weather forecast for my location (or for each trail’s location if needed).\n   * Decide whether conditions are safe and comfortable for hiking (e.g., mild temperature, no storms, low rain probability, safe wind).\n\n2. **Check My Calendar:**\n\n   * Review my availability. Only recommend trails that fit into free time slots.\n   * If my calendar is fully booked, let me know and suggest alternative future times.\n\n3. **Choose the Trail:**\n\n   * From the Excel “Trail Sheet,” filter trails that match conditions:\n\n     * Avoid muddy/dangerous trails in rain.\n     * Suggest shaded or shorter trails in hot weather.\n     * Fit trail duration to available free time.\n     * Add variety if I’ve recently visited the same trail.\n\n4. **Generate the Recommendation:**\n\n   * Clearly state whether today is good for hiking.\n   * If yes: recommend the top 1–2 trails including details (trail name, distance, difficulty, estimated duration, weather suitability, calendar slot).\n   * If no: explain why (bad weather, busy schedule, etc.) and suggest the next best date/time.\n\n5. **Send Gmail:**\n\n   * Summarize the final recommendation.\n   * Email it to **[chaudrysharma@gmail.com](mailto:chaudrysharma@gmail.com)** with the subject line:\n\n     * `\"Trail Recommendation - [Date]\"`\n   * Body should include:\n\n     * Today’s weather summary.\n     * Availability summary.\n     * Recommended trail(s) with details.\n     * Reasoning behind the choice.\n\n**Output Style:**\n\n* Be clear, concise, and actionable.\n* Provide reasoning for each decision (weather + schedule + trail suitability).\n* Always end with a direct suggestion (e.g., “Yes, you should go. I recommend Eagle Creek Trail at 10am—it’s a 5-mile easy trail, weather is sunny and 75°F, and your calendar is free. Sending this recommendation to your email now.”).\n\n\n\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5b11a598-0976-4cb3-871d-8768cde88943",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        208
+      ],
+      "id": "099ebbe9-2f03-43c2-8370-83f20327ec93",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "GNL1HnxHUZoRnRQg",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "trail-run-session"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "760bfc2a-5112-455c-a483-97713b49340d",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -16,
+        -144
+      ],
+      "id": "1460ecf7-364f-49b6-9201-1d3aaa06f440",
+      "name": "When chat message received",
+      "webhookId": "1463a3b0-e8b0-45ff-a2a8-077c254436e7"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "chaudrysharma@gmail.com",
+          "mode": "list",
+          "cachedResultName": "chaudrysharma@gmail.com"
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        368,
+        208
+      ],
+      "id": "416a76aa-b211-4800-bc76-c5803ac72e53",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "RBqVxHNOGnOiIFT4",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "format": "imperial",
+        "cityName": "indianapolis"
+      },
+      "type": "n8n-nodes-base.openWeatherMapTool",
+      "typeVersion": 1,
+      "position": [
+        464,
+        304
+      ],
+      "id": "d90e415b-1d07-45ff-bf3a-c49d3be3a9c6",
+      "name": "OpenWeatherMap",
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "TIGibJ3I8JGZvsRC",
+          "name": "OpenWeatherMap account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1NPld89Lvc4MeG8c8xPTmI_TrRhP0AoaWnJio-D-Puy4",
+          "mode": "list",
+          "cachedResultName": "Trails",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NPld89Lvc4MeG8c8xPTmI_TrRhP0AoaWnJio-D-Puy4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NPld89Lvc4MeG8c8xPTmI_TrRhP0AoaWnJio-D-Puy4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        272
+      ],
+      "id": "da914b57-80a5-40f1-a3dc-0b55e2e767e7",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AttNHVVsBw9VjqD3",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "chaudrysharma@gmail.com",
+        "subject": "weather forecast for the trail",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        576,
+        160
+      ],
+      "id": "40da57f2-dc92-4e62-8863-51efd0ee9aca",
+      "name": "Send a message in Gmail",
+      "webhookId": "e0ca7505-c9da-454c-8cd3-f0282e2bfe5f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Yyb3JF67qEFdR28d",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenWeatherMap": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "21805181-dc47-463a-9743-2cf4da391be5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b29ea38f660687699b67f9a691e3efae0d441a0aa4d6457c6f7ebcf96ab8dc56"
+  },
+  "id": "VXpdnqAEYj1tvFrO",
+  "tags": []
+}
