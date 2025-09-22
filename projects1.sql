@@ -122,3 +122,24 @@ and percentage_laid_off is null ;
 
 ALTER TABLE layoffs_staging2
 drop column row_num;
+
+# exploration
+
+select max(total_laid_off),max(percentage_laid_off)
+from layoffs_stagging2;
+
+select *
+from layoffs_staging2
+where percentage_laid_off=1
+order by funds_raised_millions desc;
+
+select *
+from layoffs_staging2
+where percentage_laid_off=1
+order by funds_raised_millions desc;
+
+select *
+from layoffs_staging2
+where percentage_laid_off=1
+order by funds_raised_millions desc;
+
