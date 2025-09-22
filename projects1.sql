@@ -143,3 +143,29 @@ from layoffs_staging2
 where percentage_laid_off=1
 order by funds_raised_millions desc;
 
+select country, sum(total_laid_off)
+from layoffs_staging2
+group by country
+order by 2 desc;
+select country, sum(total_laid_off)
+from layoffs_staging2
+group by stage
+order by 2 desc;
+
+
+select substring('date',1,7) AS 'MONTH', sum(total_laid_off)
+from layoffs_staging2
+where substring('date',1,7) is not null
+group by 'month'
+order by 1 desc;
+
+with rolling_total as
+(
+select substring('date',1,7) AS 'MONTH', sum(total_laid_off) AS total_off
+from layoffs_staging2
+where substring('date',1,7) is not null
+group by 'month'
+order by 1 desc
+)
+select 'month' ,sum(total_off) over(order by 'month')
+from rolling_total;
