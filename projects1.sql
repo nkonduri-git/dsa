@@ -169,3 +169,18 @@ order by 1 desc
 )
 select 'month' ,sum(total_off) over(order by 'month')
 from rolling_total;
+
+select company,'date',SUM(total_laid_off)
+from layoffs_staging2
+group by company,'date';
+
+with Company_year (company,years,total_laid_off) AS 
+(
+select company,'date',SUM(total_laid_off)
+from layoffs_staging2
+group by company,'date'
+)
+select*,dense_rank()over(partition by years order by total_laid_off desc)
+from Company_year
+where years is not null;
+
