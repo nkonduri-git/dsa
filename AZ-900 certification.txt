@@ -1,0 +1,315 @@
+AZ-900 certification
+ 
+dedicated server
+one machine to one business
+virtual private server:
+ 
+one physical machine dedicated to a single business
+the single machine is virtualized into sub-machine 
+shared hosting 1 server used by multiple business
+cloud
+multiple machine that acts as one system 
+
+there could be 100 of cloud services the 4 most services for iaas would be 
+cloud
+pay for what you use
+can be used anywhere
+cloud services secure by default
+data backup
+inc or dec resources on demand 
+automate the scaling during the spikes and drops in demand elastic
+services
+saas software as a service
+a product that is run and managed by the service provider 
+paas focus on deployment and management of your apps 
+iaas infrastructure as a service 
+provides access to networking ,computers and  data storage 
+public cloud
+the cloud provider has the whole infrastructure
+private cloud
+if a company or org has its own servers amd cloud 
+hybrid
+both private and public
+on premises cost is high and cloud cost is less
+
+capex is costly and opex is simple and cost effective
+solutions architect
+a technical org that a architect a technical solution using the multiple systems
+cloud architect:
+a solutions architect that is focused on architecting the technical solutions using the cloud services
+------
+a cloud architect must ensure the service available at high 
+scalability:your ability to grow rapidly
+elasticity:your ability to shrink and grow to reach demands
+high availability : services remain available anytime
+load balancer used to evenly distribute the traffic between multiple servers in one data centre
+high scalability: vertical one bigger server and horizontal add multiple serves 
+high elasticity: ability to automatically increase or decrese your capacity based on demand
+horizontal scling:
+scaling out: add more servers of same size 
+scaling in:removing more servers of same size 
+azure vm scale sets automatically inc or dec in response to demand or a defined schedule 
+highly fault tolerant: no single point of failure 
+
+-----
+fail-overs : is when you have plan to shift to a reduant system in case primary fail secondary all the data synced from primary
+azure traffic manager: which is a dns based traffic balancer to fail-over from a primary system to a standy-secondary system
+high durability:
+recover from a disaster and prevent the loss of data 
+business continuity plan:
+unplanned disruption then how business continues 
+recovery point objective:
+the max accepeteble data loss after an unplanned data-loss incident 
+recovery-time objective:how muc hamount of downtime your business can tolerate without any loss 
+disaster recovery options: 
+low -- backup and restore
+backup your data and restore it to new infrastructure.hours time taken
+pilot light: data is replicated to another region with the minimal serviced running 10 min 
+warm standby:scaled down copy of your infrastructure running ready to scale up minutes 
+multi site active;scaled up copy of your infrsstructure in another region real-time
+
+the evolution of computing:
+dedicated:a physical server wholly utilized by single customer 
+you will overpay for the underutilized server but security is high and privacy full 
+
+capex  vs                                                    opex
+spending money upfront 
+like infrastructure                                   the cost paid for only leasing soft             
+
+
+          
+                                            training employees in cloud services 
+                                                       paying for cloud support
+
+solutions architect
+technical solution using multiple systems 
+cloud architect:
+solely on architecting the technical solutions using cloud services 
+
+cloud architect need to understand the 
+availability-your ability to ensure a service remains available
+scalability-your ability to grow rapidly
+elasticity-your ability to shrink or grow to meet the demand
+fault-tolerance-your ability to prevent failure
+disaster recovery-your ability to recover to recover from failure
+
+aavailabilty - load balancer used so that one place server down route to other if its in other data centre more preferable as it is more effective one data centre fail
+high scalabilty:
+inc your capacity based on traffic 2 scalings
+1)vertical in one server space inc
+2)horizontal add servers
+high elasticity;
+inc or dec capacity based on demand
+scaling out- inc servers
+scaling in- remove more servers
+avm vm scale set automatically inc or dec in response to demand 
+high fault tolerant:
+preventing the chance of failure:
+by making the copy of the production database
+azure traffic manager used 
+high durability:
+recover from loss of data 
+business continuity plan
+how a business will continue to operate even when there is a unplanned disruption 
+recovery point objective : the max amount of data loss which is acceptable after an unplanned data loss occurs
+recovery time objective:the max amount of downtime your business can handle without a  big loss 
+the evolution of computing
+1)dedicated wasted space 
+2)vm(virtual machines):you can run multiple virtual machines on one machine 
+we can share with the other customers 
+so that fraction only charged 
+but you are limited by the usage of the guest os and resource sharing problem occurs 
+3)containers:vm can run multiple containers 
+docker deamon is the name of soft layer that lets you run a multiple container 
+more cost effective 
+multiple apps can run side by side without being limited to the same os 
+4)functions;
+
+even further subdivided into small parts apps further divided 
+a managed vm running managed containers
+serverless compute it is called
+choose the piece code and memory and time of utilization that is what we pay
+region grouping of multiple data centres 
+azure 58 groups across 140 countries 
+
+a geography 
+azure geography is a discrete market of two or more regions that preserves data residency data stays native to country and compliance boundry 
+each region is paired with the another region 300 miles away only one region is updated at a time to ensure no outages 
+
+not all azure services available at all regions 
+recommended region that provides the broadcast range of service capabilities and support available zones 
+alt regions 
+a region that extends azures footprint within 
+not designed to support az
+general availability: when service ready to be used by everyone 
+
+\azure services grouped into 3 categories
+1)foundational:when ga immediately or in 12 month in recommended and alt regions
+2)mainstream when ga immediately or in 12 month in recommended may be available in alt regions 
+3)specialized : available in recommended or alternative region beased on customers demand
+special regions meet their compliance 
+availability zones the zones containing the one or more datacentres
+region = 3 az
+choosing the number of az means that zone will be placed the data 
+some regions no az available
+fault domain:
+a logical grouping of hardware to avoid a single point of failure within an az group of virtual machines that share a common power source
+update domain:
+azure make sure you update the underlaying hardware and software make sure they dont go offline
+availability set:
+vm in availability set are different fault/update domains to avoid downtime
+1`availability set multiple domains present on if suppose 1 rack 3 fd then 1 down other 2 operational 
+azure computing services:
+1)azure vm
+windows or Linux machines used you can choose your own os,memory,cpu
+2)azure container 
+docker as a service run containerized apps on azured without provising the servers
+3)azure Kubernetes services:
+easy to deploy manage and scale containerized application
+4)azure service fabric:
+tier-1 enterprise containers as service
+distributed systems platform runs in azure or on-premises 
+easy to package deploy and manage and reliable 
+5)azure functions:
+serverless compute runs code without managing the server
+short time run once done underlying servers shutting down
+6)azure batch:
+plans schedules and executes your batch computer workloads across multiple 100+ jobs in parallel
+virtual machine:
+lets u use a server without having to buy the server
+the size determined by the image
+azure vm billed by hourly rate
+azure launch creates a lot of components like
+nsg(network security group) : attached to the nic which provides the rules around the ports and protocals 
+network interface: a device that handles ip protocals 
+virtual machine instance: the actual server
+Microsoft supports lots of os you can also bring your own version of the Linux by creating it using the Linux virtual hard disk
+az fault domains:
+a logical grouping of hardware to avoid single point of failure 
+update domain:
+update to hardware and software
+availability set : a logical grou[ing in azure to ensure that vm you place in the availability set are different fault/update domain to avoid downtimes
+operating system:
+that manages all the programs in your system
+azure scale set:
+allows you to automatically inc or dec the capacity 
+create a scaling policies to automatically add or remove based on host metrics 
+create a health checks 
+1)load balancer:
+evenly distribute the vm across the multiple availability zone 
+load balancer 2 types:
+1)application gateway https web traffic load balancer
+2)azure load balancer tcp/udp network traffic 
+
+scaling policy:
+scale out:when an instance should be added to scale set to increase capacity
+cpu per, no of vm and after how long
+scale in: reduce capacity removed to dec capacity 
+after scale set you have lot of options to configure the rule
+aggregates after collect what to do 
+if we want more insights in the app
+we will install app insights:a small instrumental package i  your application that monitprs app and sends infor azure
+azure diagnostics :it is an agent runs inside a vm instance  
+scale-in policy:which vm must be removed when decrese the capacity
+
+default delete the one with the highest instance id 
+delete the oldest vm and deleted the newest vm
+update policy:
+determine how vm inst are brought up-to date 
+1)automatic:
+inc with the start upgrading immediately 
+2)manual:
+exisiting instance manually upgrade
+3)rolling:
+upgrades roll out in batches with optional pause 
+health monitoring:
+used to analysis if our server is healthy or unhealthy
+
+two modes of health monitoring:
+application health extension:
+ ping an http request to a specific path and expect a status of 200 
+load balancer probe:
+ allow you to check based on tcp,udp or http r4equest
+automatic repair 
+if an instance found to be unhealthy and launch new instance
+Microsoft azure virtual desktop desktop and app virtualization service it works across all the devices like windows ios can access remote apps
+safety high
+
+advantages
+it provides full windows desktop virtualization 
+and also great integreation with the Microsoft 365  app 
+-reduce cost of licensing and infrastructure
+-protect against outages
+-manages the virtual desktop infrastructure
+azure also provides the app services
+azure app services:
+load balance
+autoscaling
+automated manager
+
+
+azure app services 3 tiers and also create a unique name because it becomes its own domain
+
+
+runtimes
+a runtime software that are excuted while your program is running
+a runtime means what 
+deployment slots:
+allows you to create different env of your web applications asscoaited to different host name 
+azure app service env:
+fully isolated env provide for securely running the app 
+azure deployment slots apps we create multiple slots so that 1 has copy of other so that we can make changes in one and replace or swap with production
+multiple ase can be created within single az region  ase ideal for horizontal scaling
+ase external 
+ilb
+azure contaners instance:
+package,deploy,manage cloud applications using containers fully managed docker as a service 
+azure container instance: allows you to launch containers without the need to worry about the configuration or managing the underlying vm 
+azure container instance is designed for 
+1)simple application 
+2)task automation
+containers can be started in sec 
+containers per sec charged
+containers have custom sizing
+containers can deploy both the windows and Linux
+conatiners group:
+are collection of conatiners that get scheduled on the same host machine.
+this containers share the:
+lifecycle
+resources
+localnetwork
+storage
+multi-containers only support Linux containers now
+2 way to deploy 
+1)resource manager template
+yaml file
+containers restart policies
+container env variable:
+allow you to pass conf details to your container
+azure portals we can set that
+azure container doesnot store data that is generated with in the cycle
+which you can mount by using the azure file
+secret volume
+which can be done by using the giving the data in the power shell
+azure-file-volume-share-name: filename
+azure vnet
+we will launch our resources in that network
+azure dns own dns domain manage 
+azure vnet is a logically isolated section of azure network vnet multiple vnets attach which can be used as a 1 network
+they are 2 1)regional regional vnets peer
+2)global global vnets peer
+nic
+it is a hardware component that connects the computer to computer 
+nic communicate with the ip
+azure subnet virtual isolation with in thr network
+subnet 1 route table needed so that we can access 
+azure no prv or public subnet
+network sec can be kept
+azure dns(domain name service)
+it is a service translating a service name to its ip address 
+azure domains public allows you to manage the domains for internet access domains
+pointing your domain to your website
+private dns allows you to use your own custom domains instead of the azure provided domains
+
+virtual private network:extends a private network in public network gateway:
+it is a software for vpn it will deploy 2 vms they and ateway services 
