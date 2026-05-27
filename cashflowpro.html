@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CashFlow Pro — Irregular Income Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --ink: #1a1814;
+    --card: #ffffff;
+    --border: #ddd9d2;
+    --accent: #c84b1a;
+    --accent2: #2563eb;
+    --success: #166534;
+    --success-bg: #dcfce7;
+    --warn: #92400e;
+    --warn-bg: #fef3c7;
+    --danger: #991b1b;
+    --danger-bg: #fee2e2;
+    --muted: #78716c;
+    --surface: #f0ece5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Syne', sans-serif; min-height: 100vh; }
+
+  header { background: var(--ink); color: var(--bg); padding: 22px 52px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { color: var(--accent); }
+  .header-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #aaa49c; letter-spacing: 1px; text-align: right; }
+
+  .banner { background: var(--accent); color: white; padding: 18px 52px; display: flex; align-items: center; gap: 16px; }
+  .banner-headline { font-size: 1.5rem; font-weight: 700; }
+  .banner-sub { font-size: 0.88rem; opacity: 0.88; margin-top: 2px; }
+
+  .layout { display: grid; grid-template-columns: 380px 1fr; gap: 0; min-height: calc(100vh - 130px); }
+
+  .sidebar { background: var(--ink); color: var(--bg); padding: 32px 28px; overflow-y: auto; }
+  .sidebar-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: #78716c; margin-bottom: 20px; }
+
+  .section-head { font-size: 0.95rem; font-weight: 700; margin: 24px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2825; display: flex; align-items: center; gap: 8px; }
+  .section-head .badge { background: var(--accent); color: white; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; padding: 2px 6px; border-radius: 3px; }
+
+  label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #a09890; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; margin-top: 12px; }
+  input, select {
+    width: 100%; background: #232220; border: 1px solid #3a3835; color: var(--bg);
+    padding: 9px 12px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus, select:focus { border-color: var(--accent); }
+
+  .income-row { background: #1a1916; border: 1px solid #2a2825; border-radius: 8px; padding: 12px; margin-bottom: 8px; position: relative; }
+  .income-row .row-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .remove-btn { background: none; border: none; color: #555; cursor: pointer; font-size: 1rem; line-height: 1; }
+  .remove-btn:hover { color: var(--accent); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .expense-item { display: grid; grid-template-columns: 1fr 1fr 36px; gap: 6px; align-items: end; margin-bottom: 6px; }
+
+  .btn { padding: 10px 18px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.18s; letter-spacing: 0.5px; }
+  .btn-accent { background: var(--accent); color: white; }
+  .btn-accent:hover { background: #b03e12; }
+  .btn-ghost { background: #1a1916; border: 1px solid #3a3835; color: var(--bg); }
+  .btn-ghost:hover { border-color: var(--accent); }
+  .btn-sm { padding: 7px 12px; font-size: 0.7rem; }
+  .rm-btn { background: #1a1916; border: 1px solid #3a3835; color: #666; width: 36px; height: 36px; border-radius: 6px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+  .rm-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  .run-btn { width: 100%; padding: 14px; margin-top: 24px; font-size: 0.88rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-weight: 600; cursor: pointer; letter-spacing: 1px; transition: background 0.18s; }
+  .run-btn:hover { background: #b03e12; }
+
+  /* Right panel */
+  .panel { padding: 36px 40px; overflow-y: auto; }
+
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .kpi .k-val { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 600; line-height: 1; }
+  .kpi .k-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+  .kpi.good .k-val { color: var(--success); }
+  .kpi.bad .k-val { color: var(--danger); }
+  .kpi.warn .k-val { color: var(--warn); }
+  .kpi.neutral .k-val { color: var(--accent2); }
+
+  .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .chart-title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+  .chart-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 20px; }
+
+  canvas { display: block; max-width: 100%; }
+
+  .month-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .month-table th { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--border); }
+  .month-table th:first-child { text-align: left; }
+  .month-table td { padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; }
+  .month-table td:first-child { text-align: left; font-family: 'Syne', sans-serif; font-weight: 500; }
+  .month-table tr.surplus td { background: #f0fdf4; }
+  .month-table tr.deficit td { background: #fff1f2; }
+  .month-table tr.tight td { background: #fffbeb; }
+  .pos { color: var(--success); }
+  .neg { color: var(--danger); }
+  .neutral-v { color: var(--warn); }
+
+  .alert-box { border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; display: flex; gap: 14px; align-items: flex-start; }
+  .alert-box.danger { background: var(--danger-bg); border: 1px solid #fca5a5; }
+  .alert-box.warn { background: var(--warn-bg); border: 1px solid #fde68a; }
+  .alert-box.good { background: var(--success-bg); border: 1px solid #86efac; }
+  .alert-icon { font-size: 1.4rem; line-height: 1; }
+  .alert-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 3px; }
+  .alert-body { font-size: 0.82rem; line-height: 1.5; }
+
+  .empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; color: var(--muted); text-align: center; }
+  .empty-icon { font-size: 4rem; margin-bottom: 16px; }
+  .empty h2 { font-size: 1.3rem; margin-bottom: 8px; }
+  .empty p { font-size: 0.88rem; max-width: 340px; line-height: 1.6; }
+
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .kpi-strip { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">CashFlow<span>Pro</span></div>
+  </div>
+  <div class="header-meta">Irregular Income Runway Planner<br/>All data stored locally</div>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-title">Configure Your Scenario</div>
+
+    <div class="section-head"><span class="badge">01</span> Starting Balance</div>
+    <label>Current Savings / Cash on Hand ($)</label>
+    <input type="number" id="starting-balance" value="8500" min="0" />
+
+    <div class="section-head"><span class="badge">02</span> Income Sources
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="addIncome()">+ Add</button>
+    </div>
+    <div id="income-list"></div>
+
+    <div class="section-head"><span class="badge">03</span> Fixed Expenses
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="addExpense('fixed')">+ Add</button>
+    </div>
+    <div id="fixed-expense-list"></div>
+
+    <div class="section-head"><span class="badge">04</span> Variable Expenses
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="addExpense('variable')">+ Add</button>
+    </div>
+    <div id="variable-expense-list"></div>
+
+    <div class="section-head"><span class="badge">05</span> Projection Settings</div>
+    <label>Months to Project</label>
+    <select id="proj-months">
+      <option value="6">6 months</option>
+      <option value="12" selected>12 months</option>
+      <option value="18">18 months</option>
+      <option value="24">24 months</option>
+    </select>
+
+    <label>Income Variability (%)</label>
+    <input type="number" id="variability" value="15" min="0" max="80" />
+    <div style="font-size:0.65rem;color:#555;margin-top:4px;font-family:'JetBrains Mono',monospace;">Simulates ±% swings on irregular income</div>
+
+    <button class="run-btn" onclick="runProjection()">Run Projection →</button>
+  </div>
+
+  <!-- MAIN PANEL -->
+  <div class="panel" id="main-panel">
+    <div class="empty">
+      <div class="empty-icon">💸</div>
+      <h2>Model your cash flow reality</h2>
+      <p>Built for freelancers, consultants, and anyone with irregular income. See exactly when you'd run dry — before it happens.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+let incomeId = 0, expenseId = 0;
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function addIncome(name='', base='', freq='monthly', months='all') {
+  const id = ++incomeId;
+  const div = document.createElement('div');
+  div.className = 'income-row';
+  div.id = 'inc-' + id;
+  div.innerHTML = `
+    <div class="row-name">
+      <span>${name || 'Income Source ' + id}</span>
+      <button class="remove-btn" onclick="document.getElementById('inc-${id}').remove()">×</button>
+    </div>
+    <label>Source Name</label>
+    <input type="text" value="${name||'Freelance Client'}" id="iname-${id}" placeholder="Client / Employer" />
+    <div class="two-col">
+      <div><label>Amount ($)</label><input type="number" value="${base||3200}" id="iamt-${id}" min="0" /></div>
+      <div><label>Frequency</label>
+        <select id="ifreq-${id}">
+          <option value="monthly" ${freq==='monthly'?'selected':''}>Monthly</option>
+          <option value="biweekly" ${freq==='biweekly'?'selected':''}>Bi-weekly</option>
+          <option value="quarterly" ${freq==='quarterly'?'selected':''}>Quarterly</option>
+          <option value="sporadic" ${freq==='sporadic'?'selected':''}>Sporadic</option>
+        </select>
+      </div>
+    </div>
+    <label>Active Months (comma-sep, or "all")</label>
+    <input type="text" value="${months}" id="imonths-${id}" placeholder="all  or  1,3,5,7,9,11" />
+  `;
+  document.getElementById('income-list').appendChild(div);
+}
+
+function addExpense(type, name='', amt='', varies='no') {
+  const id = ++expenseId;
+  const listId = type === 'fixed' ? 'fixed-expense-list' : 'variable-expense-list';
+  const div = document.createElement('div');
+  div.className = 'expense-item';
+  div.id = 'exp-' + id;
+  div.innerHTML = `
+    <input type="text" value="${name || (type==='fixed'?'Rent':'Groceries')}" id="ename-${id}" placeholder="Expense name" />
+    <input type="number" value="${amt || (type==='fixed'?1500:400)}" id="eamt-${id}" placeholder="Amount" min="0" />
+    <button class="rm-btn" onclick="document.getElementById('exp-${id}').remove()">×</button>
+  `;
+  document.getElementById(listId).appendChild(div);
+}
+
+function collectExpenses(listId) {
+  const items = document.querySelectorAll(`#${listId} .expense-item`);
+  return Array.from(items).map(item => {
+    const id = item.id.replace('exp-','');
+    return {
+      name: document.getElementById('ename-'+id)?.value || 'Expense',
+      amt: parseFloat(document.getElementById('eamt-'+id)?.value) || 0
+    };
+  });
+}
+
+function collectIncomes() {
+  const items = document.querySelectorAll('#income-list .income-row');
+  return Array.from(items).map(item => {
+    const id = item.id.replace('inc-','');
+    return {
+      name: document.getElementById('iname-'+id)?.value || 'Income',
+      base: parseFloat(document.getElementById('iamt-'+id)?.value) || 0,
+      freq: document.getElementById('ifreq-'+id)?.value || 'monthly',
+      months: document.getElementById('imonths-'+id)?.value || 'all'
+    };
+  });
+}
+
+function getIncomeForMonth(income, monthIdx, variability) {
+  // monthIdx 0-based
+  const m = monthIdx + 1;
+  const activeMonths = income.months.trim().toLowerCase();
+  let active = true;
+  if (activeMonths !== 'all') {
+    const mList = activeMonths.split(',').map(x => parseInt(x.trim()));
+    active = mList.includes(m);
+  }
+  if (!active) return 0;
+
+  const varFrac = variability / 100;
+  const swing = 1 + (Math.random() * 2 - 1) * varFrac;
+
+  let multiplier = 1;
+  if (income.freq === 'biweekly') multiplier = 2.17;
+  else if (income.freq === 'quarterly') multiplier = (m % 3 === 0) ? 3 : 0;
+  else if (income.freq === 'sporadic') multiplier = Math.random() > 0.4 ? 1 : 0;
+
+  return income.base * multiplier * swing;
+}
+
+function runProjection() {
+  const startBal = parseFloat(document.getElementById('starting-balance').value) || 0;
+  const projMonths = parseInt(document.getElementById('proj-months').value);
+  const variability = parseFloat(document.getElementById('variability').value) || 0;
+
+  const incomes = collectIncomes();
+  const fixedExp = collectExpenses('fixed-expense-list');
+  const varExp = collectExpenses('variable-expense-list');
+
+  const totalFixed = fixedExp.reduce((s, e) => s + e.amt, 0);
+  const totalVar = varExp.reduce((s, e) => s + e.amt, 0);
+  const totalExpenses = totalFixed + totalVar;
+
+  // Run 3 scenarios: base, optimistic, pessimistic
+  const scenarios = { base: [], optimistic: [], pessimistic: [] };
+  const RUNS = 50;
+
+  for (let run = 0; run < RUNS; run++) {
+    let bal = startBal;
+    for (let mo = 0; mo < projMonths; mo++) {
+      let monthIncome = 0;
+      incomes.forEach(inc => { monthIncome += getIncomeForMonth(inc, mo, variability); });
+      const varSwing = 1 + (Math.random() * 2 - 1) * (variability * 0.3 / 100);
+      const monthExp = totalFixed + totalVar * varSwing;
+      bal = bal + monthIncome - monthExp;
+      if (!scenarios.base[mo]) scenarios.base[mo] = [];
+      scenarios.base[mo].push(bal);
+    }
+  }
+
+  // Build monthly data using medians / percentiles
+  const monthlyData = [];
+  const now = new Date();
+  for (let mo = 0; mo < projMonths; mo++) {
+    const vals = scenarios.base[mo].sort((a, b) => a - b);
+    const median = vals[Math.floor(RUNS * 0.5)];
+    const p10 = vals[Math.floor(RUNS * 0.1)];
+    const p90 = vals[Math.floor(RUNS * 0.9)];
+
+    let monthIncome = 0;
+    incomes.forEach(inc => { monthIncome += getIncomeForMonth(inc, mo, 0); });
+
+    const mIdx = (now.getMonth() + mo) % 12;
+    monthlyData.push({
+      label: MONTHS[mIdx] + ' ' + (now.getFullYear() + Math.floor((now.getMonth() + mo) / 12)),
+      median, p10, p90,
+      income: Math.round(monthIncome),
+      expenses: Math.round(totalExpenses),
+      net: Math.round(monthIncome - totalExpenses)
+    });
+  }
+
+  // Find runway (first month p10 goes negative)
+  let runwayMonth = monthlyData.findIndex(m => m.p10 < 0);
+  const runwayLabel = runwayMonth === -1 ? 'Beyond projection' : monthlyData[runwayMonth].label;
+
+  const avgMonthlyIncome = monthlyData.reduce((s, m) => s + m.income, 0) / projMonths;
+  const coverageRatio = avgMonthlyIncome / totalExpenses;
+  const finalMedian = monthlyData[projMonths - 1].median;
+  const negativMonths = monthlyData.filter(m => m.net < 0).length;
+
+  // Render
+  let html = '';
+
+  // KPIs
+  const runwayColor = runwayMonth === -1 ? 'good' : runwayMonth < 3 ? 'bad' : 'warn';
+  html += `<div class="kpi-strip">
+    <div class="kpi ${runwayColor}">
+      <div class="k-val">${runwayMonth === -1 ? '✓ Safe' : runwayMonth + ' mo'}</div>
+      <div class="k-label">Cash Runway (Worst Case)</div>
+    </div>
+    <div class="kpi ${coverageRatio >= 1.2 ? 'good' : coverageRatio >= 1 ? 'warn' : 'bad'}">
+      <div class="k-val">${coverageRatio.toFixed(2)}x</div>
+      <div class="k-label">Avg Income / Expenses</div>
+    </div>
+    <div class="kpi ${negativMonths === 0 ? 'good' : negativMonths <= 2 ? 'warn' : 'bad'}">
+      <div class="k-val">${negativMonths}</div>
+      <div class="k-label">Negative Net Months</div>
+    </div>
+    <div class="kpi ${finalMedian > 0 ? 'neutral' : 'bad'}">
+      <div class="k-val">$${Math.round(finalMedian).toLocaleString()}</div>
+      <div class="k-label">Projected Balance (End)</div>
+    </div>
+  </div>`;
+
+  // Alerts
+  if (runwayMonth !== -1 && runwayMonth < 3) {
+    html += `<div class="alert-box danger"><div class="alert-icon">🚨</div><div><div class="alert-title">Critical: Cash Crunch in ${runwayMonth} Month(s)</div><div class="alert-body">In a pessimistic scenario, your balance goes negative by <strong>${runwayLabel}</strong>. Consider reducing variable expenses or securing a retainer client now.</div></div></div>`;
+  } else if (negativMonths > 0) {
+    html += `<div class="alert-box warn"><div class="alert-icon">⚠️</div><div><div class="alert-title">${negativMonths} Month(s) with Negative Cash Flow</div><div class="alert-body">You spend more than you earn in some months. Your current savings act as a buffer. Build a 3-month emergency reserve to cover gaps safely.</div></div></div>`;
+  } else {
+    html += `<div class="alert-box good"><div class="alert-icon">✅</div><div><div class="alert-title">Looking Healthy</div><div class="alert-body">Your income covers expenses across the projection. Keep maintaining at least 3 months of fixed expenses as a reserve.</div></div></div>`;
+  }
+
+  // Chart
+  html += `<div class="chart-card">
+    <div class="chart-title">Projected Balance Over Time</div>
+    <div class="chart-sub">Median projection with pessimistic (P10) and optimistic (P90) bands</div>
+    <canvas id="balanceChart" height="100"></canvas>
+  </div>`;
+
+  // Monthly table
+  html += `<div class="chart-card">
+    <div class="chart-title">Month-by-Month Breakdown</div>
+    <div class="chart-sub">Based on median scenario. Variability: ±${variability}%</div>
+    <table class="month-table">
+      <thead><tr><th>Month</th><th>Est. Income</th><th>Expenses</th><th>Net</th><th>Balance (Median)</th></tr></thead>
+      <tbody>`;
+  monthlyData.forEach(m => {
+    const rowClass = m.net > 0 ? 'surplus' : m.net < -500 ? 'deficit' : 'tight';
+    const netColor = m.net > 0 ? 'pos' : m.net < 0 ? 'neg' : 'neutral-v';
+    html += `<tr class="${rowClass}">
+      <td>${m.label}</td>
+      <td>$${m.income.toLocaleString()}</td>
+      <td>$${m.expenses.toLocaleString()}</td>
+      <td class="${netColor}">${m.net >= 0 ? '+' : ''}$${m.net.toLocaleString()}</td>
+      <td style="font-weight:600">$${Math.round(m.median).toLocaleString()}</td>
+    </tr>`;
+  });
+  html += `</tbody></table></div>`;
+
+  document.getElementById('main-panel').innerHTML = html;
+
+  // Draw chart with canvas
+  requestAnimationFrame(() => {
+    const canvas = document.getElementById('balanceChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.parentElement.offsetWidth - 48;
+    canvas.height = 200;
+    const W = canvas.width, H = canvas.height;
+    const pad = { top: 20, right: 20, bottom: 30, left: 70 };
+
+    const allVals = [...monthlyData.map(m => m.p10), ...monthlyData.map(m => m.p90)];
+    const minV = Math.min(0, ...allVals);
+    const maxV = Math.max(...allVals);
+    const range = maxV - minV || 1;
+
+    const xScale = (i) => pad.left + (i / (projMonths - 1)) * (W - pad.left - pad.right);
+    const yScale = (v) => pad.top + (1 - (v - minV) / range) * (H - pad.top - pad.bottom);
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid lines
+    ctx.strokeStyle = '#e5e1da'; ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = pad.top + (i / 4) * (H - pad.top - pad.bottom);
+      ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+      const val = maxV - (i / 4) * range;
+      ctx.fillStyle = '#78716c'; ctx.font = '10px JetBrains Mono, monospace'; ctx.textAlign = 'right';
+      ctx.fillText('$' + Math.round(val).toLocaleString(), pad.left - 6, y + 4);
+    }
+
+    // Zero line
+    if (minV < 0 && maxV > 0) {
+      const y0 = yScale(0);
+      ctx.strokeStyle = '#991b1b'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.moveTo(pad.left, y0); ctx.lineTo(W - pad.right, y0); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Band (p10-p90)
+    ctx.fillStyle = 'rgba(37,99,235,0.08)';
+    ctx.beginPath();
+    monthlyData.forEach((m, i) => {
+      if (i === 0) ctx.moveTo(xScale(i), yScale(m.p90));
+      else ctx.lineTo(xScale(i), yScale(m.p90));
+    });
+    for (let i = projMonths - 1; i >= 0; i--) ctx.lineTo(xScale(i), yScale(monthlyData[i].p10));
+    ctx.closePath(); ctx.fill();
+
+    // P10 line
+    ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 3]);
+    ctx.beginPath();
+    monthlyData.forEach((m, i) => {
+      if (i === 0) ctx.moveTo(xScale(i), yScale(m.p10));
+      else ctx.lineTo(xScale(i), yScale(m.p10));
+    });
+    ctx.stroke(); ctx.setLineDash([]);
+
+    // Median line
+    ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    monthlyData.forEach((m, i) => {
+      if (i === 0) ctx.moveTo(xScale(i), yScale(m.median));
+      else ctx.lineTo(xScale(i), yScale(m.median));
+    });
+    ctx.stroke();
+
+    // X labels
+    ctx.fillStyle = '#78716c'; ctx.font = '9px JetBrains Mono, monospace'; ctx.textAlign = 'center';
+    monthlyData.forEach((m, i) => {
+      if (i % Math.ceil(projMonths / 6) === 0) ctx.fillText(m.label.split(' ')[0], xScale(i), H - 6);
+    });
+
+    // Legend
+    ctx.textAlign = 'left'; ctx.font = '10px JetBrains Mono, monospace';
+    ctx.strokeStyle = '#2563eb'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(pad.left, 12); ctx.lineTo(pad.left+20, 12); ctx.stroke();
+    ctx.fillStyle = '#1a1814'; ctx.fillText('Median', pad.left + 24, 16);
+    ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]); ctx.beginPath(); ctx.moveTo(pad.left+90, 12); ctx.lineTo(pad.left+110, 12); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillText('Worst Case', pad.left + 114, 16);
+  });
+}
+
+// Seed defaults
+addIncome('Freelance Work', 3800, 'monthly', 'all');
+addIncome('Consulting Project', 4500, 'quarterly', '3,6,9,12');
+addExpense('fixed', 'Rent', 1500);
+addExpense('fixed', 'Health Insurance', 320);
+addExpense('fixed', 'Subscriptions', 85);
+addExpense('variable', 'Groceries', 420);
+addExpense('variable', 'Transportation', 180);
+addExpense('variable', 'Dining / Entertainment', 200);
+runProjection();
+</script>
+</body>
+</html>
